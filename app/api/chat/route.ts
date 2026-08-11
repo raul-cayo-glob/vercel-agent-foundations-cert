@@ -18,6 +18,9 @@ export async function POST(req: Request) {
   const run = await start(chatFlow, [messages]);
   return createUIMessageStreamResponse({
     stream: run.readable,
+    headers: {
+      "x-workflow-run-id": run.runId,
+    },
   });
 }
 
